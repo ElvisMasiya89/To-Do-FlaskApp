@@ -9,6 +9,7 @@ This guide will walk you through running your Flask application using Docker Com
 If you haven't already, clone the repository containing your Docker Compose configuration file (`docker-compose.yml`) and your application code.
 
 git clone <repository_url>
+
 cd <repository_directory>
 
 Start the Application
@@ -19,7 +20,7 @@ To run the application, follow these steps:
 
     Navigate to the directory where your docker-compose.yml file is located and execute the following command:
 
-    bash
+ 
 
 docker-compose up --build
 
@@ -59,12 +60,11 @@ Cleaning Up
 
 To remove all containers and volumes created by Docker Compose, you can use the following commands:
 
-bash
 
 docker-compose down -v
 
 This will stop and remove the containers and also delete the associated volumes. Use this command with caution, as it will delete all database data if you have any.
 
-Feel free to customize the environment variables and configurations as needed for your specific application. Happy coding!
+Feel free to customize the environment variables and configurations as needed for your specific application.
 
 
