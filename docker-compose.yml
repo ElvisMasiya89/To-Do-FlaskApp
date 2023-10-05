@@ -1,0 +1,37 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./FrontEnd
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      SECRET_KEY: Friends
+      BACKEND_URL: http://backend:5000  # Set the backend URL
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URI: 'postgresql://postgres:password123@postgres:5432/todo_db'
+      SECRET_KEY: TheBigBangTheory
+    command: ["wait-for-it", "postgres:5432", "--", "python", "app.py"]  
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: todo_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
