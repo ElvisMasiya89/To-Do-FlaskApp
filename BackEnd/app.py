@@ -1,19 +1,18 @@
-from flask import Flask, jsonify, request, flash, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv  # Import load_dotenv
 import os
-from flask_migrate import Migrate
+from dotenv import load_dotenv  # Import load_dotenv
+from flask import Flask, jsonify, request
+from flask_sqlalchemy import SQLAlchemy
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 
-#Dev
+# Dev
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')  # Get DATABASE_URI from .env
 # app.secret_key = os.getenv('SECRET_KEY')  # Get SECRET_KEY from .env
 
-#Prod
+# Prod
 # Read DATABASE_URI and SECRET_KEY from Docker environment variables
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.secret_key = os.environ.get('SECRET_KEY')
@@ -38,9 +37,6 @@ def list_todos():
     todo_list = [{'id': todo.id, 'title': todo.title, 'description': todo.description, 'due_date': todo.due_date} for
                  todo in todos]
     return jsonify(todo_list)
-
-
-from flask import Flask, jsonify, request, flash, redirect, url_for
 
 
 @app.route('/todo', methods=['POST'])
